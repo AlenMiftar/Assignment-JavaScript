@@ -12,16 +12,15 @@ console.log(text);
 let userName = "";
 
 // skapa en funktion som ber usern att fylla i sitt namn
+// 1. du behöver be usern att skriva sitt namn så att du kan ta emot det och spara det.
+// finns det något sätt vi kan göra det här på som både visar ett textmeddelande till usern
+// och tar emot en input?
 function askUserName() {
-  // 1. du behöver be usern att skriva sitt namn så att du kan ta emot det och spara det.
-  // finns det något sätt vi kan göra det här på som både visar ett textmeddelande till usern
-  // och tar emot en input?
-
   userName = prompt("please type your name");
   if (userName.length < 1) {
     userName = prompt("Wrong, please type your name");
-    alert(`Welcome user: ${userName} to Task Manager application!`);
-  } else alert(`Welcome user: ${userName} to Task Manager application!`);
+    alert(`Welcome to Task Manager application ${userName}!`);
+  } else alert(`Welcome to Task Manager application ${userName}!`);
   return userName;
 }
 

@@ -1,15 +1,15 @@
 // TASK MANAGER
 
-alert("alert() visar endast en ruta med ett meddelande till usern");
+// alert("alert() visar endast en ruta med ett meddelande till usern");
 
-// exemplet nedan sparas input i variabeln text
-const text = prompt(
-  "prompt() visar en ruta med ett meddelande OCH tar emot en input från usern så att vi kan spara input i en variabel"
-);
-// så vi kan tex logga ut variabeln text för att se värdet
-console.log(text);
+// // exemplet nedan sparas input i variabeln text
+// const text = prompt(
+//   "prompt() visar en ruta med ett meddelande OCH tar emot en input från usern så att vi kan spara input i en variabel"
+// );
+// // så vi kan tex logga ut variabeln text för att se värdet
+// console.log(text);
 
-let userName = "";
+let userName;
 
 // skapa en funktion som ber usern att fylla i sitt namn
 // 1. du behöver be usern att skriva sitt namn så att du kan ta emot det och spara det.
@@ -17,15 +17,28 @@ let userName = "";
 // och tar emot en input?
 function askUserName() {
   userName = prompt("please type your name");
-  if (userName.length < 1) {
+
+  if (userName.length <= 0) {
     userName = prompt("Wrong, please type your name");
+  } else {
     alert(`Welcome to Task Manager application ${userName}!`);
-  } else alert(`Welcome to Task Manager application ${userName}!`);
+  }
+  console.log(userName);
   return userName;
 }
 
+// askUserName();
+
+// menu function
+function menu() {
+  const choice = parseInt(prompt("choose"));
+}
+
+// startar funktionen askUserName som i sin tur triggar menu() funktionen
 askUserName();
-//   // 1 lösning: prompt() är svaret där kan du skriva ett meddelande och ta emot input
+menu();
+
+// 1 lösning: prompt() är svaret där kan du skriva ett meddelande och ta emot input
 
 //   // 2. vart behöver du komma åt värdet på username enligt uppgiften?
 //   // är det endast i funktionen askUserName()?
@@ -47,11 +60,3 @@ askUserName();
 //   // 5. till sist, om allt gått bra ska menu() funktion triggas och köras.
 //   // när du kommer hit och allt funkar säg till Helena :) så tar vi nästa steg
 //   menu();
-
-// // menu function
-// function menu() {
-//   const choice = parseInt(prompt("text meddelande här"));
-// }
-
-// // startar funktionen askUserName som i sin tur triggar menu() funktionen
-// askUserName();

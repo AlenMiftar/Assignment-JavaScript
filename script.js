@@ -18,11 +18,10 @@ let userName;
 function askUserName() {
   userName = prompt("please type your name");
 
-  if (userName.length <= 0) {
+  do {
     userName = prompt("Wrong, please type your name");
-  } else {
-    alert(`Welcome to Task Manager application ${userName}!`);
-  }
+  } while (userName.length === 0);
+  alert(`Welcome to Task Manager application ${userName}!`);
   console.log(userName);
   return userName;
 }

@@ -30,8 +30,8 @@ const taskManager = {
 
     // här kan du sätta prompt
     const input = prompt("What do you want to do?");
-    if (input === "") {
-      alert("Fill in what to do!");
+    if (input === "" || !isNaN(input)) {
+      alert("Error - Please fill in what you want to do!");
       this.addTask();
     }
 
@@ -40,7 +40,6 @@ const taskManager = {
       description: input,
       complete: false,
     };
-
     this.tasks.push(this.addTask);
     console.log(
       "id:" +
@@ -57,6 +56,15 @@ const taskManager = {
     // kör menu() igen för att komma tillbaka till menyn
     // när det funkar lägg in felhantering tex kolla så att input är tom
   },
+  // försökte att klura ut hur functionen completeTask borde gå till men lyckades inte uppnå det resultat jag ville ha.
+  // completeTask: function () {
+  //   const completeTask = prompt(`Have you completed task: ${taskId}?`);
+  //   if (completeTask === "yes") {
+  //     task.complete = true;
+  //   }
+  //   console.log(task.complete);
+  //   menu();
+  // },
 };
 
 function askUserName() {
@@ -66,21 +74,22 @@ function askUserName() {
     alert("you need to fill in your name!");
     askUserName();
   } else alert(`Welcome to Task Manager application @: ${userName}!`);
-  // det här är ju för att dubbelkolla att det funkar din egna "debugger"
   console.log(userName);
-  // return userName;
   menu();
 }
 
 function menu() {
   // parseInt gör att vi tar emot ett nummer istället för en string
-  const choice = parseInt(prompt("1) Add new task"));
+  const choice = parseInt(prompt("1) Add new task,\n2) Complete task,"));
   if (isNaN(choice)) {
-    alert("you need to type a number between 1 - 4!");
+    alert("you need to select a number between 1 - 4!");
     menu();
   } else if (choice === 1) {
     taskManager.addTask();
-  }
+  } else if (choice === 2) {
+    taskManager.completeTask();
+  } else alert("Error - could not find choice, Please try again");
+  menu();
 }
 
 askUserName();

@@ -29,17 +29,22 @@ const taskManager = {
     // här kan vi skriva logik till vår funktion
 
     // här kan du sätta prompt
+    const input = prompt("What do you want to do?");
+    if (input === "") {
+      alert("Fill in what to do");
+    }
 
     const task = {
       id: taskId++,
       // här behöver du byta ut "" till en beskrivning du får från användaren
-      description: "",
+      description: input,
       complete: false,
     };
 
     // lägg till task i tasks array
     // push() är samma som add() i c# den lägger till ett element på arrayen
-
+    // this.addTask(task);
+    menu();
     // kör menu() igen för att komma tillbaka till menyn
     // när det funkar lägg in felhantering tex kolla så att input är tom
   },
@@ -49,13 +54,9 @@ function askUserName() {
   userName = prompt("Please enter your name");
 
   if (userName === "" || !isNaN(userName)) {
-    alert("you need fill in your name!");
+    alert("you need to fill in your name!");
     askUserName();
   }
-
-  /*  while (userName.length === 0) {
-    userName = prompt("Wrong! Please enter your name");
-  } */
 
   alert(`Welcome to Task Manager application @: ${userName}!`);
   // det här är ju för att dubbelkolla att det funkar din egna "debugger"

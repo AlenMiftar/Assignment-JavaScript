@@ -31,7 +31,7 @@ const taskManager = {
     // här kan du sätta prompt
     const input = prompt("What do you want to do?");
     if (input === "") {
-      alert("Fill in what to do");
+      alert("Fill in what to do!");
       this.addTask();
     }
 
@@ -65,9 +65,7 @@ function askUserName() {
   if (userName === "" || !isNaN(userName)) {
     alert("you need to fill in your name!");
     askUserName();
-  }
-
-  alert(`Welcome to Task Manager application @: ${userName}!`);
+  } else alert(`Welcome to Task Manager application @: ${userName}!`);
   // det här är ju för att dubbelkolla att det funkar din egna "debugger"
   console.log(userName);
   // return userName;
@@ -77,8 +75,10 @@ function askUserName() {
 function menu() {
   // parseInt gör att vi tar emot ett nummer istället för en string
   const choice = parseInt(prompt("1) Add new task"));
-
-  if (choice === 1) {
+  if (isNaN(choice)) {
+    alert("you need to type a number between 1 - 4!");
+    menu();
+  } else if (choice === 1) {
     taskManager.addTask();
   }
 }

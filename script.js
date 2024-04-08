@@ -32,6 +32,7 @@ const taskManager = {
     const input = prompt("What do you want to do?");
     if (input === "") {
       alert("Fill in what to do");
+      this.addTask();
     }
 
     const task = {
@@ -41,6 +42,8 @@ const taskManager = {
       complete: false,
     };
 
+    this.tasks.push(this.addTask);
+    console.log(task.description);
     // lägg till task i tasks array
     // push() är samma som add() i c# den lägger till ett element på arrayen
     // this.addTask(task);
@@ -75,4 +78,4 @@ function menu() {
 }
 
 askUserName();
-//menu();
+// menu()

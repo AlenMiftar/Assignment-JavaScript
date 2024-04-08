@@ -37,16 +37,22 @@ const taskManager = {
 
     const task = {
       id: taskId++,
-      // här behöver du byta ut "" till en beskrivning du får från användaren
       description: input,
       complete: false,
     };
 
     this.tasks.push(this.addTask);
-    console.log(task.description);
+    console.log(
+      "id:" +
+        task.id +
+        " description:" +
+        task.description +
+        " completed:" +
+        task.complete
+    );
     // lägg till task i tasks array
     // push() är samma som add() i c# den lägger till ett element på arrayen
-    // this.addTask(task);
+    // this.addTask();
     menu();
     // kör menu() igen för att komma tillbaka till menyn
     // när det funkar lägg in felhantering tex kolla så att input är tom

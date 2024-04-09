@@ -27,7 +27,6 @@ const taskManager = {
   // fråga: hur kan vi definiera propertien addTask()? det ska vara en funktion för att lägga till en task
   addTask: function () {
     // här kan vi skriva logik till vår funktion
-
     // här kan du sätta prompt
     const input = prompt("What do you want to do?");
     if (input === "" || !isNaN(input)) {
@@ -65,6 +64,23 @@ const taskManager = {
   //   console.log(task.complete);
   //   menu();
   // },
+  completeTask: function () {
+    const completeTask = prompt(`Do you want to mark task ${task} as marked?`);
+    if (completeTask === "yes") {
+      task.complete = true;
+      this.completeTask();
+    }
+    this.tasks.push(this.completeTask);
+    console.log(
+      task
+      // "id:" +
+      //   task.id +
+      //   " description:" +
+      //   task.description +
+      //   " completed:" +
+      //   task.complete
+    );
+  },
 };
 
 function askUserName() {
@@ -80,7 +96,7 @@ function askUserName() {
 
 function menu() {
   // parseInt gör att vi tar emot ett nummer istället för en string
-  const choice = parseInt(prompt("1) Add new task,\n2) Complete task,"));
+  const choice = parseInt(prompt("1) Add new task,\n2) Complete task,\n"));
   if (isNaN(choice)) {
     alert("you need to select a number between 1 - 4!");
     menu();

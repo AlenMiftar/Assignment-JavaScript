@@ -7,8 +7,11 @@ const taskManager = {
   // fråga: hur kan vi definiera propertien addTask()? det ska vara en funktion för att lägga till en task
   addTask: function () {
     const taskDescription = prompt("Please add task description:");
-    if (taskDescription.trim() === "" || !isNaN(taskDescription)) {
+    if (taskDescription.trim() === "") {
       alert("Task description can not be empty!");
+      this.addTask();
+    } else if (!isNaN(taskDescription)) {
+      alert("Invalid description\n Task description can not only be numbers!");
       this.addTask();
     }
 
@@ -18,7 +21,8 @@ const taskManager = {
       complete: false,
     };
 
-    this.tasks.push(this.addTask);
+    this.tasks.push(task);
+    alert("Task added!");
     console.log(
       "id:" +
         task.id +
@@ -28,47 +32,17 @@ const taskManager = {
         task.complete
     );
     menu();
-    // lägg till task i tasks array
-    // push() är samma som add() i c# den lägger till ett element på arrayen
-    // this.addTask();
-    // kör menu() igen för att komma tillbaka till menyn
-    // när det funkar lägg in felhantering tex kolla så att input är tom
-  },
-  // försökte att klura ut hur functionen completeTask borde gå till men lyckades inte uppnå det resultat jag ville ha.
-  // completeTask: function () {
-  //   const completeTask = prompt(`Have you completed task: ${taskId}?`);
-  //   if (completeTask === "yes") {
-  //     task.complete = true;
-  //   }
-  //   console.log(task.complete);
-  //   menu();
-  // },
-  completeTask: function () {
-    const completedTask = prompt(
-      `Do you want to mark task ${tasks.task} as completed?`
-    );
-    if (completedTask === "yes") {
-      this.task = true;
-      // this.completeTask.push(this.task);
-    }
-    this.tasks.push(this.completeTask);
-    console.log(
-      "id:" +
-        this.task.id +
-        " description:" +
-        task.description +
-        " completed:" +
-        task.complete
-    );
   },
 };
 
 function askUserName() {
-  userName = prompt("Please enter your name");
+  userName = prompt("Please fill in your name!");
 
-  if (userName === "" || !isNaN(userName)) {
+  if (userName === "") {
     alert("You need to fill in your name!");
     askUserName();
+  } else if (!isNaN(userName)) {
+    alert("You need to fill in your name NOT a number!");
   } else alert(`Welcome to Task Manager application @: ${userName}!`);
   console.log(userName);
   menu();
@@ -89,4 +63,3 @@ function menu() {
 }
 
 askUserName();
-// menu()

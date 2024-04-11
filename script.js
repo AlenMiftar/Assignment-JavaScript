@@ -2,16 +2,15 @@ let userName;
 let taskId = 1;
 
 const taskManager = {
-  // fråga: hur kan vi definiera propertien tasks? det ska vara en array som ska innehålla alla tasks
   tasks: [],
-  // fråga: hur kan vi definiera propertien addTask()? det ska vara en funktion för att lägga till en task
   addTask: function () {
     const taskDescription = prompt("Please add task description:");
+
     if (taskDescription.trim() === "") {
       alert("Task description can not be empty!");
       this.addTask();
     } else if (!isNaN(taskDescription)) {
-      alert("Invalid description\n Task description can not only be numbers!");
+      alert("Invalid description!\nTask description can NOT be numbers!");
       this.addTask();
     }
 
@@ -22,44 +21,72 @@ const taskManager = {
     };
 
     this.tasks.push(task);
+
     alert("Task added!");
-    console.log(
-      "id:" +
+
+    menu();
+  },
+
+  listAllTasks: function () {
+    let message;
+    this.tasks.forEach((task) => {
+      message +=
+        "Id: " +
         task.id +
-        " description:" +
+        " Description: " +
         task.description +
-        " completed:" +
-        task.complete
-    );
+        " Completed: " +
+        task.complete +
+        "\n";
+    });
+    if (taskManager.tasks.length === 0) {
+      alert("No task has been added yet!");
+      menu();
+    } else alert(message);
     menu();
   },
 };
 
 function askUserName() {
-  userName = prompt("Please fill in your name!");
+  userName = prompt("Please fill in your name:");
 
-  if (userName === "") {
+  if (userName.trim() === "") {
     alert("You need to fill in your name!");
     askUserName();
   } else if (!isNaN(userName)) {
     alert("You need to fill in your name NOT a number!");
+    askUserName();
   } else alert(`Welcome to Task Manager application @: ${userName}!`);
-  console.log(userName);
   menu();
 }
 
 function menu() {
-  // parseInt gör att vi tar emot ett nummer istället för en string
-  const choice = parseInt(prompt("1) Add new task,\n2) Complete task,\n"));
-  if (isNaN(choice)) {
-    alert(" Invalid input! You need to select a number between 1 - 4!");
-    menu();
-  } else if (choice === 1) {
-    taskManager.addTask();
-  } else if (choice === 2) {
-    taskManager.completeTask();
-  } else alert("Error - could not find choice, Please try again");
-  menu();
-}
+  const choice = parseInt(
+    prompt(
+      "Select a choice:\n1) Add new task\n2) Complete task\n3) List all tasks\n4) List completed tasks\n5) Exit"
+    )
+  );
 
+  switch (choice) {
+    case 1:
+      taskManager.addTask();
+      break;
+    case 2:
+      console.log(taskManager.tasks);
+      break;
+    case 3:
+      taskManager.listAllTasks();
+      break;
+    case 4:
+      console.log("Hello");
+      break;
+    case 5:
+      alert("Goodbye!");
+      return;
+    default:
+      alert("Invalid Input, please choose between 1 - 5");
+      menu();
+      break;
+  }
+}
 askUserName();

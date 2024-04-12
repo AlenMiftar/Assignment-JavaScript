@@ -28,7 +28,7 @@ const taskManager = {
   },
 
   listAllTasks: function () {
-    let message;
+    let message = "";
     this.tasks.forEach((task) => {
       message +=
         "Id: " +
@@ -48,7 +48,7 @@ const taskManager = {
 };
 
 function askUserName() {
-  userName = prompt("Please fill in your name:");
+  userName = prompt("Please enter your name:");
 
   if (userName.trim() === "") {
     alert("You need to fill in your name!");
@@ -82,7 +82,9 @@ function menu() {
       break;
     case 5:
       alert("Goodbye!");
-      return;
+      exit; // ända sättet att verkligen avsluta för om man använder return så stänger den inte av alltid(varför?)
+    // return;
+    // När man klickar på avbryt så får man felmeddelande istället för att avrbyta,hur gör man för att klicka avbryt(prompt)?
     default:
       alert("Invalid Input, please choose between 1 - 5");
       menu();
@@ -90,3 +92,5 @@ function menu() {
   }
 }
 askUserName();
+
+// todo next: ask google how to find a specific element in an array javascript

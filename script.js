@@ -31,13 +31,20 @@ const taskManager = {
     const completedTask = prompt(
       "Please enter which task you want to mark as completed?"
     );
-    this.tasks.task.includes(completedTask);
-    console.log(completedTask);
-    if (completedTask === true) {
-      alert(`Task: ${completedTask} has been marked as completed!`);
-      menu();
-    } else {
-      alert(`Task: ${completedTask} does not exist`);
+    let foundTask = "";
+    this.tasks.forEach((task) => {
+      if (task.description.includes(completedTask)) {
+        task.complete = true;
+        foundTask = task;
+        alert(`Task: ${completedTask} has been marked as completed!`);
+        menu();
+      }
+      // console.log(task);
+    });
+    console.log("Found task: " + foundTask);
+    if (!foundTask) {
+      alert(`Task: ${completedTask} does not exist2`);
+      console.log(this.tasks);
       menu();
     }
   },
@@ -60,6 +67,26 @@ const taskManager = {
     } else alert(message);
     menu();
   },
+
+  listAllCompleted: function () {
+    let message = "";
+    this.tasks.forEach((task) => {
+      if (task.complete) {
+        message +=
+          "Id: " +
+          task.id +
+          " Description: " +
+          task.description +
+          " Completed: " +
+          task.complete +
+          "\n";
+      }
+    });
+    console.log(message);
+    // logic för tom message
+
+    menu();
+  },
 };
 
 function askUserName() {
@@ -71,8 +98,10 @@ function askUserName() {
   } else if (!isNaN(userName)) {
     alert("You need to fill in your name NOT a number!");
     askUserName();
-  } else alert(`Welcome to Task Manager application @: ${userName}!`);
-  menu();
+  } else {
+    alert(`Welcome to Task Manager application @: ${userName}!`);
+    menu();
+  }
 }
 
 function menu() {
@@ -93,13 +122,13 @@ function menu() {
       taskManager.listAllTasks();
       break;
     case 4:
-      console.log("Hello");
+      taskManager.listAllCompleted();
       break;
     case 5:
       alert("Goodbye!");
-      exit; // ända sättet att verkligen avsluta för om man använder return så stänger den inte av alltid(varför?)
-    // return;
-    // När man klickar på avbryt så får man felmeddelande istället för att avrbyta,hur gör man för att klicka avbryt(prompt)?
+
+      return;
+
     default:
       alert("Invalid Input, please choose between 1 - 5");
       menu();
@@ -107,5 +136,3 @@ function menu() {
   }
 }
 askUserName();
-
-// todo next: ask google how to find a specific element in an array javascript

@@ -27,6 +27,21 @@ const taskManager = {
     menu();
   },
 
+  completeTask: function () {
+    const completedTask = prompt(
+      "Please enter which task you want to mark as completed?"
+    );
+    this.tasks.task.includes(completedTask);
+    console.log(completedTask);
+    if (completedTask === true) {
+      alert(`Task: ${completedTask} has been marked as completed!`);
+      menu();
+    } else {
+      alert(`Task: ${completedTask} does not exist`);
+      menu();
+    }
+  },
+
   listAllTasks: function () {
     let message = "";
     this.tasks.forEach((task) => {
@@ -72,7 +87,7 @@ function menu() {
       taskManager.addTask();
       break;
     case 2:
-      console.log(taskManager.tasks);
+      taskManager.completeTask();
       break;
     case 3:
       taskManager.listAllTasks();

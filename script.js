@@ -28,6 +28,36 @@ const taskManager = {
   },
 
   completeTask: function () {
+    /*
+    Från Helena:
+    Jättebra att du har fått det här att funka men för att jag göra det ännu
+    bättre så skulle du kanske låta usern välja baserat på id? Då kan du till och med
+    visa en lista med alla tasks först och be usern mata in det id på den task
+    som dom vill markera som complete.
+
+    gör vi det kan vi använda en fiffig array metod som heter find()
+    find() används för att hitta det första elementet i arrayen som uppfyller 
+    ett visst villkor. 
+    
+    metoden tar en funktion som parameter, vilken testar varje element 
+    tills ett passande element hittas. om ett sådant element hittas, returneras det. 
+    annars returneras undefined.
+
+    här är ett exempel:
+
+    const id = parseInt(prompt(`Enter the task ID to mark as completed:`));
+    const task = this.tasks.find((task) => task.id === id);
+    if (!task) {
+      alert("Task not found.");
+      menu();
+    }
+    task.completed = true;
+    alert("Task marked as completed.");
+    menu();
+
+    det första man skulle vilja göra är dock att loopa igenom arrayen och visa usern
+    alla tasks innan usern väljer :)
+    */
     const completedTask = prompt(
       "Please enter which task you want to mark as completed?"
     );
@@ -69,6 +99,28 @@ const taskManager = {
   },
 
   listAllCompleted: function () {
+    /*
+    Här behöver du tänka igenom vad du ska göra:
+
+    ska du visa alla tasks som finns i tasks arrayen?
+    eller ska du visa enbart vissa tasks som finns i tasks arrayen?
+
+    om svaret är att du bara vill visa vissa tasks i arrayen måste du först
+    filtrera ut arrayen och spara i en ny variabel. 
+
+    undersök array metoden filter() googla: JavaScriot array method filter
+    du bör se mdn web docs först, gå in där så ser du syntax exempel
+
+    enkelt förklarat är filter en metod som skapar en ny array som 
+    innehåller alla element från den ursprungliga arrayen som uppfyller 
+    ett visst villkor definierat av en funktion. 
+    
+    den här funktionen kallas för varje element i arrayen, och om 
+    funktionen returnerar true för ett element (tex att complete är true), 
+    inkluderas det i den nya arrayen. om inga element uppfyller villkoret, 
+    returneras en tom array.
+
+    */
     let message = "";
     this.tasks.forEach((task) => {
       if (task.complete) {

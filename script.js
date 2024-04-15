@@ -51,24 +51,6 @@ const taskManager = {
     task.completed = true;
     alert("Task marked as completed.");
     menu();
-
-    // const completedTask = prompt(
-    //   "Please enter which task you want to mark as completed?"
-    // );
-    // let foundTask = "";
-    // this.tasks.forEach((task) => {
-    //   if (task.description.includes(completedTask)) {
-    //     task.complete = true;
-    //     foundTask = task;
-    //     alert(`Task: ${completedTask} has been marked as completed!`);
-    //     menu();
-    //   }
-    // });
-    // if (!foundTask) {
-    //   alert(`Task: ${completedTask} does not exist!`);
-    //   console.log(this.tasks);
-    //   menu();
-    // }
   },
 
   listAllTasks: function () {
@@ -91,11 +73,9 @@ const taskManager = {
   },
 
   listAllCompleted: function () {
-    result = "";
-    result += this.tasks.filter((task) => task.completed === true);
-
+    const result = this.tasks.filter((task) => task.completed);
     let message = "";
-    this.result.forEach((task) => {
+    result.forEach((task) => {
       if (task.completed) {
         message +=
           "Id: " +
@@ -107,7 +87,7 @@ const taskManager = {
           "\n";
       }
     });
-    console.log(message);
+    alert(message);
     menu();
   },
 };

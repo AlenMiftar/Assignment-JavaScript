@@ -17,7 +17,7 @@ const taskManager = {
     const task = {
       id: taskId++,
       description: taskDescription,
-      complete: false,
+      completed: false,
     };
 
     this.tasks.push(task);
@@ -28,25 +28,47 @@ const taskManager = {
   },
 
   completeTask: function () {
-    const completedTask = prompt(
-      "Please enter which task you want to mark as completed?"
-    );
-    let foundTask = "";
+    let message = "";
     this.tasks.forEach((task) => {
-      if (task.description.includes(completedTask)) {
-        task.complete = true;
-        foundTask = task;
-        alert(`Task: ${completedTask} has been marked as completed!`);
-        menu();
-      }
-      // console.log(task);
+      message +=
+        "Id: " +
+        task.id +
+        " Description: " +
+        task.description +
+        " Completed: " +
+        task.completed +
+        "\n";
     });
-    console.log("Found task: " + foundTask);
-    if (!foundTask) {
-      alert(`Task: ${completedTask} does not exist2`);
-      console.log(this.tasks);
+
+    const id = parseInt(
+      prompt(`${message}\nEnter the task ID to mark as completed:`)
+    );
+    const task = this.tasks.find((task) => task.id === id);
+    if (!task) {
+      alert("Task not found.");
       menu();
     }
+    task.completed = true;
+    alert("Task marked as completed.");
+    menu();
+
+    // const completedTask = prompt(
+    //   "Please enter which task you want to mark as completed?"
+    // );
+    // let foundTask = "";
+    // this.tasks.forEach((task) => {
+    //   if (task.description.includes(completedTask)) {
+    //     task.complete = true;
+    //     foundTask = task;
+    //     alert(`Task: ${completedTask} has been marked as completed!`);
+    //     menu();
+    //   }
+    // });
+    // if (!foundTask) {
+    //   alert(`Task: ${completedTask} does not exist!`);
+    //   console.log(this.tasks);
+    //   menu();
+    // }
   },
 
   listAllTasks: function () {
@@ -58,7 +80,7 @@ const taskManager = {
         " Description: " +
         task.description +
         " Completed: " +
-        task.complete +
+        task.completed +
         "\n";
     });
     if (taskManager.tasks.length === 0) {
@@ -69,23 +91,26 @@ const taskManager = {
   },
 
   listAllCompleted: function () {
-    let message = "";
-    this.tasks.forEach((task) => {
-      if (task.complete) {
-        message +=
-          "Id: " +
-          task.id +
-          " Description: " +
-          task.description +
-          " Completed: " +
-          task.complete +
-          "\n";
-      }
-    });
-    console.log(message);
-    // logic för tom message
-
+    let result = this.tasks.filter((task) => task.completed === true);
+    alert(result);
+    console.log(result);
     menu();
+    // let message = "";
+    // this.tasks.forEach((task) => {
+    //   if (task.completed) {
+    //     message +=
+    //       "Id: " +
+    //       task.id +
+    //       " Description: " +
+    //       task.description +
+    //       " Completed: " +
+    //       task.completed +
+    //       "\n";
+    //   }
+    // });
+    // console.log(message);
+    // // logic för tom message
+    // menu();
   },
 };
 
@@ -110,7 +135,7 @@ function menu() {
       "Select a choice:\n1) Add new task\n2) Complete task\n3) List all tasks\n4) List completed tasks\n5) Exit"
     )
   );
-
+  // Jag bytte till switch istället för jag tycker det är mer passande för en meny val och mer clean code än if/else statement
   switch (choice) {
     case 1:
       taskManager.addTask();
@@ -126,13 +151,12 @@ function menu() {
       break;
     case 5:
       alert("Goodbye!");
-
       return;
-
     default:
       alert("Invalid Input, please choose between 1 - 5");
       menu();
       break;
   }
 }
+// Task Manager application start:
 askUserName();

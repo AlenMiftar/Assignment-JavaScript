@@ -91,29 +91,26 @@ const taskManager = {
   },
 
   listAllCompleted: function () {
-    let result = this.tasks.filter((task) => task.completed === true);
-    alert(result);
-    console.log(result);
+    result = "";
+    result += this.tasks.filter((task) => task.completed === true);
+
+    let message = "";
+    this.result.forEach((task) => {
+      if (task.completed) {
+        message +=
+          "Id: " +
+          task.id +
+          " Description: " +
+          task.description +
+          " Completed: " +
+          task.completed +
+          "\n";
+      }
+    });
+    console.log(message);
     menu();
-    // let message = "";
-    // this.tasks.forEach((task) => {
-    //   if (task.completed) {
-    //     message +=
-    //       "Id: " +
-    //       task.id +
-    //       " Description: " +
-    //       task.description +
-    //       " Completed: " +
-    //       task.completed +
-    //       "\n";
-    //   }
-    // });
-    // console.log(message);
-    // // logic för tom message
-    // menu();
   },
 };
-
 function askUserName() {
   userName = prompt("Please enter your name:");
 

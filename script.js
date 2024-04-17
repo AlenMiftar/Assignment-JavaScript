@@ -47,36 +47,20 @@ const taskManager = {
     if (!task) {
       alert("Task not found.");
       menu();
+    } else {
+      task.completed = true;
+      alert("Task marked as completed.");
+      menu();
     }
-    task.completed = true;
-    alert("Task marked as completed.");
-    menu();
   },
 
   listAllTasks: function () {
-    let message = "";
-    this.tasks.forEach((task) => {
-      message +=
-        "Id: " +
-        task.id +
-        " Description: " +
-        task.description +
-        " Completed: " +
-        task.completed +
-        "\n";
-    });
-    if (taskManager.tasks.length === 0) {
-      alert("No task has been added yet!");
+    if (this.tasks.length === 0) {
+      alert("No task has been added!");
       menu();
-    } else alert(message);
-    menu();
-  },
-
-  listAllCompleted: function () {
-    const result = this.tasks.filter((task) => task.completed);
-    let message = "";
-    result.forEach((task) => {
-      if (task.completed) {
+    } else {
+      let message = "";
+      this.tasks.forEach((task) => {
         message +=
           "Id: " +
           task.id +
@@ -85,10 +69,37 @@ const taskManager = {
           " Completed: " +
           task.completed +
           "\n";
+      });
+      alert(message);
+      menu();
+    }
+  },
+
+  listAllCompleted: function () {
+    if (this.tasks.length === 0) {
+      alert("No task has been completed!");
+      menu();
+    } else {
+      const result = this.tasks.filter((task) => task.completed);
+      if (result.length === 0) {
+        alert("No task has been completed!");
+        menu();
+      } else {
+        let message = "";
+        result.forEach((task) => {
+          message +=
+            "Id: " +
+            task.id +
+            " Description: " +
+            task.description +
+            " Completed: " +
+            task.completed +
+            "\n";
+          alert(message);
+          menu();
+        });
       }
-    });
-    alert(message);
-    menu();
+    }
   },
 };
 function askUserName() {
@@ -109,7 +120,7 @@ function askUserName() {
 function menu() {
   const choice = parseInt(
     prompt(
-      "Select a choice:\n1) Add new task\n2) Complete task\n3) List all tasks\n4) List completed tasks\n5) Exit"
+      `Hello ${userName}, select a choice:\n1) Add new task\n2) Complete task\n3) List all tasks\n4) List completed tasks\n5) Exit`
     )
   );
   // Jag bytte till switch istället för jag tycker det är mer passande för en meny val och mer clean code än if/else statement
